@@ -29,7 +29,49 @@ class TESTArrangeInGrid(Scene):
             flow_order="dr")
 
 
-class Test2(Scene):
+class HeartFuncGlimpse(Scene):
+    # 甚至还有❤️函数
+
+    def construct(self):
+
+
+
+        ax = NumberPlane(
+            x_range=[-3,3,1], # 要展示的数字坐标范围是 -16~18
+            y_range=[-3,3,1],
+            x_length=8,         # 数轴实际占用屏幕尺寸是 8
+            y_length=8,
+            axis_config={
+                "include_numbers": False,
+                "tip_width": 0.15, # 箭头大小---宽
+                "tip_height": 0.15, # 箭头大小---高
+                "include_ticks": True,
+                "tick_size": 0.05,
+                "include_tip": True, # Add a tip to x-axis and y-axis
+                })
+
+        heartGraph = ax.plot_implicit_curve(
+            lambda x,y : (x*x + y*y - 1)**3 - x**2 * y**3,
+            color = RED)
+        
+        tex = MathTex(r'(x^2+y^2-1)^3-x^2y^3=0', font_size=80, opacity=0.5)
+
+        self.play(Write(tex))
+        self.play(tex.animate.move_to(3*DOWN))   
+        self.play(Create(ax),Create(heartGraph))
+        self.play(FadeOut(ax, run_time=2))
+        self.play(Broadcast(heartGraph, run_time=5))
+
+
+        self.add(ax, heartGraph)
+
+        # self.play(DrawBorderThenFill(graph))
+
+        return super().construct()
+
+class OtherFuncsGlimpse(Scene):  
+        # 其他函数，高中要学的函数展示
+
         def construct(self):
 
             funcs_gp = VGroup(*[
@@ -39,9 +81,9 @@ class Test2(Scene):
             funcs_gp.arrange(buff=0.3).to_edge(UP)
 
             ax = NumberPlane(
-                x_range=[-16,16,3],
+                x_range=[-16,16,3], # 要展示的数字坐标范围是 -16~18
                 y_range=[-16,18,3],
-                x_length=8,
+                x_length=8,         # 数轴实际占用屏幕尺寸是 8
                 y_length=8,
                 axis_config={
                     "include_numbers": False,
@@ -92,7 +134,7 @@ class Test2(Scene):
 
 
 # 如何导入图片文件，并且将其放置在画布上
-class Test1(Scene):
+class TestImportJPG(Scene):
     def construct(self):
 
         # 莱布尼茨 提出 function 这个单词
@@ -114,7 +156,7 @@ class Test1(Scene):
 
 
 
-class Scene_1(Scene):   # 三种函数的图形展示
+class ThreeCommonFunc(Scene):   # 三种函数的图形展示
 
     def construct(self):
 
@@ -190,7 +232,7 @@ class Scene_1(Scene):   # 三种函数的图形展示
 
 
 
-class Scene_2(Scene):  # 简单回忆什么是一次函数
+class RecallLinFunc(Scene):  # 简单回忆什么是一次函数
     def construct(self):
 
 
